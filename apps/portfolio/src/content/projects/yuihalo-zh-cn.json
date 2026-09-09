@@ -1,0 +1,12 @@
+{
+  "locale": "zh-cn",
+  "translationId": "yuihalo",
+  "title": "YuiHalo",
+  "category": "科研软件",
+  "tags": ["Quantum ESPRESSO", "Web 应用"],
+  "paragraphs": [
+    "这是用于 Quantum ESPRESSO 相关研究的 Web 应用原型，将结构编辑、计算准备和执行管理整合在同一环境中。",
+    "我负责设计、技术选型与实施管理，并在开发中使用了编程智能体。相关研究已作为经过同行评审的短篇论文发表于 JCCJ。目前因毕业而暂停开发。"
+  ],
+  "paperUrl": "https://www.jstage.jst.go.jp/article/jccj/25/1/25_2026-0006/_article/-char/ja"
+}

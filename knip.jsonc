@@ -1,0 +1,9 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    "apps/portfolio": {
+      // Consumed through CSS url() in src/styles/font.css.
+      "ignoreDependencies": ["@fontsource-variable/roboto-flex"],
+    },
+  },
+}

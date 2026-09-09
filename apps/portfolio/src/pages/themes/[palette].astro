@@ -1,0 +1,8 @@
+---
+import Portfolio from '../../components/portfolio.astro';
+
+export const getStaticPaths = () => ['ocean', 'iris'].map(palette => ({ params: { palette }, props: { palette } }));
+interface Props { palette: 'ocean' | 'iris'; }
+const { palette } = Astro.props;
+---
+<Portfolio palette={palette} />

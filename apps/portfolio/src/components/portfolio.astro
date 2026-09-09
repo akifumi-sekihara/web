@@ -1,0 +1,43 @@
+---
+import * as stylex from '@stylexjs/stylex';
+import { getEntry, getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import avatar from '../../public/avatar.png';
+import { locales, languageNames, languageTags } from '../lib/locales';
+import type { Locale } from '../lib/locales';
+import Layout from '../layouts/layout.astro';
+import { styles as s } from '../styles/portfolio.stylex';
+
+interface Props { locale?: Locale; palette?: 'cobalt' | 'ocean' | 'iris'; }
+const { locale = 'en', palette = 'iris' } = Astro.props;
+const profile = await getEntry('profiles', locale);
+if (!profile) {throw new Error(`Missing profile: ${locale}`);}
+const t = profile.data;
+const projects = await getCollection('projects', entry => entry.data.locale === locale);
+---
+<Layout locale={locale} palette={palette} description={t.description}>
+<div {...stylex.attrs(s.wrap)}>
+  <header {...stylex.attrs(s.nav)}><a href={`/${locale}/`} aria-label={`Akifumi Sekihara — ${t.home}`} {...stylex.attrs(s.monogram)}>AS</a><nav aria-label={t.navigation} {...stylex.attrs(s.navLinks)}><a {...stylex.attrs(s.link)} href="#projects">{t.projects}</a><a {...stylex.attrs(s.link)} href="#background">{t.background}</a><a {...stylex.attrs(s.link)} href="#interests">{t.interests}</a></nav></header>
+  <nav aria-label="Language" {...stylex.attrs(s.languages)}>{locales.map(lang => <a href={`/${lang}/`} lang={languageTags[lang]} hreflang={languageTags[lang]} aria-current={lang === locale ? 'page' : undefined} {...stylex.attrs(s.link)}>{languageNames[lang]}</a>)}</nav>
+  <main>
+    <section {...stylex.attrs(s.hero)} aria-labelledby="name">
+      <div><p {...stylex.attrs(s.label, s.muted)}>Portfolio / {t.location}</p><h1 id="name" {...stylex.attrs(s.title)}>Akifumi<br/>Sekihara</h1><p {...stylex.attrs(s.role)}>{t.role}</p><p {...stylex.attrs(s.intro)}>{t.intro}</p><a href="https://github.com/akifumi-sekihara" {...stylex.attrs(s.button, s.heroAction)}>GitHub <span aria-hidden="true">↗</span></a></div>
+      <div {...stylex.attrs(s.portrait)}><Picture src={avatar} alt={t.avatarAlt} width={200} height={200} widths={[144, 200, 288, 400]} sizes="(max-width: 720px) 144px, 200px" formats={['avif', 'webp']} loading="eager" {...stylex.attrs(s.avatar)} /><p {...stylex.attrs(s.location)}>Akifumi Sekihara · {t.location}</p></div>
+    </section>
+    <section id="projects" aria-labelledby="projects-title" {...stylex.attrs(s.section)}>
+      <div {...stylex.attrs(s.headingRow)}><span {...stylex.attrs(s.sectionNumber)} aria-hidden="true">01</span><h2 id="projects-title" {...stylex.attrs(s.heading)}>{t.projects}</h2></div>
+      {projects.map(({data: project}) => <article {...stylex.attrs(s.project)}><div><p {...stylex.attrs(s.label)}>{project.category}</p><h3 {...stylex.attrs(s.projectTitle)}>{project.title}</h3><div {...stylex.attrs(s.tags)}>{project.tags.map(tag => <span {...stylex.attrs(s.tag)}>{tag}</span>)}</div></div><div {...stylex.attrs(s.prose)}>{project.paragraphs.map(paragraph => <p>{paragraph}</p>)}<a {...stylex.attrs(s.button, s.tonalButton)} href={project.paperUrl}>{t.readPaper} <span aria-hidden="true">↗</span></a></div></article>)}
+    </section>
+    <section id="background" aria-labelledby="background-title" {...stylex.attrs(s.section)}>
+      <div {...stylex.attrs(s.headingRow)}><span {...stylex.attrs(s.sectionNumber)} aria-hidden="true">02</span><h2 id="background-title" {...stylex.attrs(s.heading)}>{t.background}</h2></div>
+      <div {...stylex.attrs(s.grid)}>
+        <article {...stylex.attrs(s.card)}><h3 {...stylex.attrs(s.cardTitle)}>{t.softwareTitle}</h3><p {...stylex.attrs(s.cardText)}>{t.software}</p><dl {...stylex.attrs(s.tools)}><dt {...stylex.attrs(s.label)}>{t.tools}</dt><dd {...stylex.attrs(s.tags)}>{['Python','TypeScript','React','FastAPI'].map(tool => <span {...stylex.attrs(s.tag)}>{tool}</span>)}</dd></dl></article>
+        <article {...stylex.attrs(s.card, s.scienceCard)}><h3 {...stylex.attrs(s.cardTitle)}>{t.scienceTitle}</h3><p {...stylex.attrs(s.cardText)}>{t.science}</p><dl {...stylex.attrs(s.tools)}><dt {...stylex.attrs(s.label)}>{t.tools}</dt><dd {...stylex.attrs(s.tags)}>{['Quantum ESPRESSO','Environ','ASE','pymatgen'].map(tool => <span {...stylex.attrs(s.tag)}>{tool}</span>)}</dd></dl></article>
+      </div>
+      <article {...stylex.attrs(s.timeline)}><h3 {...stylex.attrs(s.cardTitle)}>{t.timeline}</h3><ol {...stylex.attrs(s.timelineList)}><li {...stylex.attrs(s.timelineItem)}><time datetime="2026-03" {...stylex.attrs(s.date)}>2026/03</time><p>{t.education}</p></li><li {...stylex.attrs(s.timelineItem)}><span {...stylex.attrs(s.date)}>2026 –</span><p>{t.employment}</p></li></ol></article>
+    </section>
+    <section id="interests" aria-labelledby="interests-title" {...stylex.attrs(s.section)}><div {...stylex.attrs(s.interest)}><div><p {...stylex.attrs(s.label)}>03 / {t.lookingAhead}</p><h2 id="interests-title" {...stylex.attrs(s.interestTitle)}>{t.interests}</h2></div><div {...stylex.attrs(s.prose)}><p>{t.interestsText}</p><div {...stylex.attrs(s.tags)}><span {...stylex.attrs(s.tag)}>AI Agents</span><span {...stylex.attrs(s.tag)}>Design Systems</span></div></div></div></section>
+  </main>
+  <footer {...stylex.attrs(s.footer)}><span>Akifumi Sekihara</span><a {...stylex.attrs(s.link)} href="https://github.com/akifumi-sekihara">GitHub ↗</a></footer>
+</div>
+</Layout>

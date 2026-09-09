@@ -1,0 +1,59 @@
+---
+import "../styles/font.css";
+import "../styles/global.css";
+import * as stylex from "@stylexjs/stylex";
+import { styles } from "../styles/portfolio.stylex";
+import { ocean, iris } from "../styles/material.generated.stylex";
+import palettes from "../styles/material-palettes.json";
+import { locales, languageTags } from '../lib/locales';
+import type { Locale } from '../lib/locales';
+
+interface Props { locale?: Locale; title?: string; description?: string; palette?: "cobalt" | "ocean" | "iris"; }
+const {
+  locale = "en",
+  palette = "iris",
+  title = "Akifumi Sekihara — Infrastructure / Software Engineer",
+  description = "Akifumi Sekihara — Infrastructure / Software Engineer, Tokyo. AI Agents、Software Engineering、Computational Scienceに関する関心とプロジェクト。",
+} = Astro.props;
+const site = Astro.site ?? new URL("https://portfolio.sekihara.dev");
+const noindex = Astro.url.pathname.startsWith("/themes/") || Astro.url.pathname.startsWith("/404");
+const canonical = new URL(noindex ? Astro.url.pathname : `/${locale}/`, site);
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  inLanguage: languageTags[locale],
+  mainEntity: {
+    "@id": new URL("/#person", site).href, "@type": "Person", image: new URL("/avatar.png", site).href, jobTitle: "Infrastructure Engineer", name: "Akifumi Sekihara", sameAs: ["https://github.com/akifumi-sekihara"], url: new URL("/", site).href,
+  },
+  url: canonical.href,
+}).replaceAll("<", "\\u003c");
+---
+<!doctype html>
+<html lang={languageTags[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {!noindex && locales.map(lang => <link rel="alternate" hreflang={languageTags[lang]} href={new URL(`/${lang}/`, site)} />)}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={new URL("/", site)} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {!noindex && <script is:inline type="application/ld+json" set:html={structuredData} />}
+    <meta name="theme-color" content={palettes.palettes[palette].surface} />
+    {import.meta.env.DEV && <link rel="stylesheet" href="/virtual:stylex.css" />}
+    {import.meta.env.DEV && <script is:inline type="module" src="/@id/virtual:stylex:runtime"></script>}
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/avatar.png" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL("/avatar.png", site)} />
+    <meta property="og:image:alt" content="Akifumi Sekihara" />
+    <meta property="og:locale" content={{ja:"ja_JP",en:"en_US",ko:"ko_KR","zh-cn":"zh_CN"}[locale]} />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:site_name" content="Akifumi Sekihara" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+  </head>
+  <body {...stylex.attrs(styles.body, palette === "ocean" && ocean, palette === "iris" && iris)}><slot /></body>
+</html>

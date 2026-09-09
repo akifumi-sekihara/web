@@ -1,0 +1,9 @@
+---
+import Portfolio from '../../components/portfolio.astro';
+import { locales } from '../../lib/locales';
+import type { Locale } from '../../lib/locales';
+
+export const getStaticPaths = () => locales.map(locale => ({ params: { locale }, props: { locale } }));
+interface Props { locale: Locale; }
+---
+<Portfolio locale={Astro.props.locale} />

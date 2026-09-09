@@ -1,0 +1,12 @@
+---
+import * as stylex from "@stylexjs/stylex";
+import { styles } from "../styles/portfolio.stylex";
+import Layout from "../layouts/layout.astro";
+---
+<Layout title="Page not found — Akifumi Sekihara">
+  <main {...stylex.attrs(styles.wrap, styles.section)}>
+    <h1 {...stylex.attrs(styles.heading)}>Page not found</h1>
+    <p>The page you requested could not be found.</p>
+    <a href="/" {...stylex.attrs(styles.button, styles.heroAction)}>Home</a>
+  </main>
+</Layout>

@@ -1,0 +1,28 @@
+{
+  "name": "Portfolio (Node LTS, rootless Docker)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/portfolio,type=bind",
+  "workspaceFolder": "/workspaces/portfolio",
+  "initializeCommand": ["sh", ".devcontainer/check-rootless.sh"],
+  "containerUser": "root",
+  "remoteUser": "root",
+  "updateRemoteUserUID": false,
+  "runArgs": [
+    "--publish=127.0.0.1:14321:4321",
+    "--publish=127.0.0.1:18787:8787"
+  ],
+  "mounts": [
+    "source=portfolio-node-modules,target=/workspaces/portfolio/node_modules,type=volume",
+    "source=portfolio-web-node-modules,target=/workspaces/portfolio/apps/portfolio/node_modules,type=volume",
+    "source=portfolio-pnpm-store,target=/pnpm/store,type=volume"
+  ],
+  "forwardPorts": [4321, 8787],
+  "portsAttributes": {
+    "4321": { "label": "Astro", "onAutoForward": "notify" },
+    "8787": { "label": "Wrangler preview", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "pnpm config set --location=global store-dir /pnpm/store && CI=true pnpm install --frozen-lockfile",
+  "shutdownAction": "stopContainer"
+}

@@ -1,0 +1,9 @@
+{
+  "extends": ["@portfolio/config/tsconfig.base.json", "astro/tsconfigs/strict"],
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["node"]
+  }
+}

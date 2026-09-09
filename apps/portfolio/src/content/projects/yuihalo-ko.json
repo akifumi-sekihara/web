@@ -1,0 +1,12 @@
+{
+  "locale": "ko",
+  "translationId": "yuihalo",
+  "title": "YuiHalo",
+  "category": "연구용 소프트웨어",
+  "tags": ["Quantum ESPRESSO", "웹 애플리케이션"],
+  "paragraphs": [
+    "Quantum ESPRESSO를 활용한 연구용 웹 애플리케이션 프로토타입입니다. 구조 편집, 계산 준비, 실행 관리를 하나의 환경에 통합했습니다.",
+    "설계, 기술 선정, 구현 관리를 담당하며 코딩 에이전트를 활용해 개발했습니다. 관련 연구는 JCCJ의 동료 심사를 거친 레터 논문으로 발표했습니다. 현재는 졸업에 따라 개발을 중단한 상태입니다."
+  ],
+  "paperUrl": "https://www.jstage.jst.go.jp/article/jccj/25/1/25_2026-0006/_article/-char/ja"
+}
