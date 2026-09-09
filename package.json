@@ -10,7 +10,7 @@
     "dev": "pnpm --filter portfolio-web dev",
     "build": "pnpm --filter portfolio-web build",
     "check-types": "pnpm --filter portfolio-web check-types",
-    "check": "pnpm lint && pnpm format:check && pnpm check-types && pnpm check:config && pnpm check:deps",
+    "check": "pnpm check-types && pnpm lint && pnpm format:check && pnpm check:config && pnpm check:deps",
     "lint": "vp lint",
     "format": "vp fmt",
     "dev:web": "pnpm --filter portfolio-web dev",
