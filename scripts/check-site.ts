@@ -10,8 +10,7 @@ const validator = new HtmlValidate({
   extends: ["html-validate:recommended"],
   rules: { "void-style": "off", "wcag/h32": "off" },
 });
-/** @param {string} dir @returns {Promise<string[]>} */
-const files = async (dir) => {
+const files = async (dir: string): Promise<string[]> => {
   const result = [];
   for (const item of await readdir(dir, { withFileTypes: true })) {
     const file = path.join(dir, item.name);
@@ -58,11 +57,9 @@ for (const file of output) {
   );
 }
 const entries = await readdir("apps/portfolio/src/content/projects");
-/** @type {Map<string, string[]>} */
-const groups = new Map();
+const groups = new Map<string, string[]>();
 for (const file of entries) {
-  /** @type {unknown} */
-  const data = JSON.parse(
+  const data: unknown = JSON.parse(
     await readFile(
       path.join("apps/portfolio/src/content/projects", file),
       "utf-8"

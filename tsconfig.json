@@ -3,8 +3,6 @@
   "compilerOptions": {
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "allowJs": true,
-    "checkJs": true,
     "lib": ["ESNext", "DOM"],
     "types": ["node"]
   },
@@ -13,6 +11,6 @@
     "worker/**/*.ts",
     "playwright.config.ts",
     "tests/**/*.ts",
-    "scripts/**/*.mjs"
+    "scripts/**/*.ts"
   ]
 }

@@ -27,6 +27,17 @@ for (const locale of ["ja", "en", "ko", "zh-cn"]) {
     await page.goto(`/${locale}/`);
     for (const width of [360, 1280]) {
       await page.setViewportSize({ height: 900, width });
+      const headings = page.locator("main > section > div:first-child > h2");
+      await expect(headings).toHaveCount(3);
+      const headingStyles = await headings.evaluateAll((elements) =>
+        elements.map((element) => ({
+          fontSize: getComputedStyle(element).fontSize,
+          fontWeight: getComputedStyle(element).fontWeight,
+          left: element.getBoundingClientRect().left,
+        }))
+      );
+      expect(headingStyles[1]).toEqual(headingStyles[0]);
+      expect(headingStyles[2]).toEqual(headingStyles[0]);
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= window.innerWidth

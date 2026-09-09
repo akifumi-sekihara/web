@@ -23,8 +23,8 @@
     "check:deps": "knip",
     "test": "node --experimental-strip-types --test tests/language.test.ts",
     "test:browser": "playwright test",
-    "check:site": "node scripts/check-site.mjs",
-    "check:performance": "node scripts/check-performance.mjs",
+    "check:site": "node --experimental-strip-types scripts/check-site.ts",
+    "check:performance": "node --experimental-strip-types scripts/check-performance.ts",
     "check:config": "tsc --noEmit -p tsconfig.json",
     "audit:deps": "pnpm audit"
   },

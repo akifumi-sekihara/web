@@ -91,12 +91,6 @@ export const styles = stylex.create({
     gridTemplateColumns: { default: "0.85fr 1.15fr", [mobile]: "1fr" },
     padding: { default: 48, [mobile]: 28 },
   },
-  interestTitle: {
-    fontSize: { default: 48, [mobile]: 36 },
-    fontWeight: 650,
-    letterSpacing: "-0.035em",
-    lineHeight: 1.1,
-  },
   intro: {
     color: colors.onSurfaceVariant,
     fontSize: 15,
@@ -202,7 +196,6 @@ export const styles = stylex.create({
     borderRadius: "32px 12px 32px 32px",
   },
   section: { paddingBlock: { default: 44, [mobile]: 28 }, scrollMarginTop: 24 },
-  sectionNumber: { color: colors.primary, fontSize: 13, fontWeight: 700 },
   tag: {
     borderColor: colors.outlineVariant,
     borderRadius: 10,
