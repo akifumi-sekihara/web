@@ -34,7 +34,7 @@ jobs:
           test "$(jq -r .path <<< "$run")" = .github/workflows/ci.yml
           test "$(jq -r .head_repository.full_name <<< "$run")" = "$REPO"
           echo "sha=$(jq -r .head_sha <<< "$run")" >> "$GITHUB_OUTPUT"
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ steps.source.outputs.sha }}
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
