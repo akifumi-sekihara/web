@@ -12,7 +12,7 @@ allowBuilds:
   lefthook: true
 catalog:
   typescript: ^6.0.3
-  "@types/node": ^24.0.0
+  "@types/node": ^26.5.1
 # Miniflare pins a vulnerable sharp; remove once upstream ships >=0.35.4.
 # https://github.com/advisories/GHSA-rgj7-g3m4-5g8c
 overrides:
