@@ -35,7 +35,7 @@
     "@types/node": "catalog:",
     "chrome-launcher": "^1.2.1",
     "html-validate": "^11.15.0",
-    "knip": "6.34.0",
+    "knip": "6.35.1",
     "lefthook": "2.1.12",
     "lighthouse": "13.4.1",
     "oxfmt": "0.64.0",
